@@ -16,6 +16,9 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
+apply plugin: 'application'
+
+mainClassName = "tw.wee.qas.Application"
 
 defaultTasks 'clean', 'build'
 
@@ -36,7 +39,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.apache.logging.log4j:log4j:$log4jVersion")
     testCompile("junit:junit:$junitVersion")
-    testCompile("org.mockito:mockito-all:$mockitoVersion")
+    testCompile("org.mockito:mockito-core:$mockitoVersion")
 }
 
 sourceSets {
