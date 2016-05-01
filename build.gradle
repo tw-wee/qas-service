@@ -4,6 +4,9 @@ buildscript {
         log4jVersion = '2.5'
         junitVersion = '4.12'
         mockitoVersion = '1.10.19'
+        flywayVersion = '4.0'
+        h2dbVersion = '1.4.191'
+        mysqlVersion = '6.0.2'
     }
     repositories {
         mavenCentral()
@@ -37,7 +40,11 @@ idea.project.vcs = "Git"
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.apache.logging.log4j:log4j:$log4jVersion")
+    compile("org.flywaydb:flyway-core:$flywayVersion")
+    compile("com.h2database:h2:$h2dbVersion")
+    compile("mysql:mysql-connector-java:$mysqlVersion")
     testCompile("junit:junit:$junitVersion")
     testCompile("org.mockito:mockito-core:$mockitoVersion")
 }
