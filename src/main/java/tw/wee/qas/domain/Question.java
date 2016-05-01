@@ -12,8 +12,8 @@ public class Question extends Auditor {
     @Column(name = "uuid", nullable = false, length = 64)
     private String uuid;
 
-    @Column(name = "question", nullable = false, length = 64)
-    private String question;
+    @Column(name = "book", nullable = false, length = 64)
+    private String book;
 
     @Column(name = "content", nullable = false)
     private String content;
@@ -26,12 +26,12 @@ public class Question extends Auditor {
         this.uuid = uuid;
     }
 
-    public String getQuestion() {
-        return question;
+    public String getBook() {
+        return book;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setBook(String book) {
+        this.book = book;
     }
 
     public String getContent() {
