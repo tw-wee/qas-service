@@ -45,6 +45,7 @@ dependencies {
     compile("org.flywaydb:flyway-core:$flywayVersion")
     compile("com.h2database:h2")
     compile("mysql:mysql-connector-java:$mysqlVersion")
+    testCompile("com.jayway.jsonpath:json-path")
     testCompile("org.springframework.boot:spring-boot-starter-test")
 }
 

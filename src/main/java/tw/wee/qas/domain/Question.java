@@ -1,5 +1,6 @@
 package tw.wee.qas.domain;
 
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,8 +10,8 @@ import javax.persistence.Table;
 @Table(name = "wee_question")
 public class Question extends Auditor {
     @Id
-    @Column(name = "uuid", nullable = false, length = 64)
-    private String uuid;
+    @Column(name = "uuid", nullable = false, length = 64, updatable = false)
+    private String uuid = UUID.randomUUID().toString();
 
     @Column(name = "book", nullable = false, length = 64)
     private String book;
