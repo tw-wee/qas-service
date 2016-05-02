@@ -1,3 +1,7 @@
+server:
+  port: 8086
+  context-path: /qas-service
+
 spring:
   datasource: # Database properties
     url: jdbc:mysql://localhost:3306/wee_qas?useSSL=false
