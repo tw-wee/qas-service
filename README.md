@@ -35,8 +35,21 @@ Questions &amp; Answers Service
 ### Load Swagger UI
 
 
-### Embedded database
+### Database & Flyway Migration
+1. Should Install Mysql in local
+2. Create schema using script in `create_db.sql`
 
+#### Commands tips:
+- Run `./gradlew flywayRepair` to repair the Flyway metadata table
+- `./gradlew clean` depends on task `flywayRepair`
 
-### Flyway Migration
+- Run `./gradlew flywayMigrate` to migrate the schema to the latest version
+- `./gradlew build` depends on task `flywayMigrate`
+
+- Run `./gradlew bootRun` will auto check and load the new db.migration scripts
+
+- **Warning: Only know what you are doing: ** Run `./gradlew flywayClean` to drops all objects in the configured schema
+
+[More about using flyway](https://flywaydb.org/documentation/gradle/): `flywayInfo`, `flywayValidate`, `flywayBaseline`
+
 
