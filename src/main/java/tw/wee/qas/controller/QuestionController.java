@@ -7,16 +7,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import tw.wee.qas.domain.Question;
-import tw.wee.qas.repository.QuestionRepository;
+import tw.wee.qas.service.QuestionService;
 
 @RestController
 @RequestMapping("/questions")
 public class QuestionController {
     @Autowired
-    private QuestionRepository questionRepository;
+    private QuestionService questionService;
 
     @RequestMapping(method = RequestMethod.GET, value = "/book/{bookUuid}")
     public Iterable<Question> retrieveQuestions(@PathVariable String bookUuid) {
-        return questionRepository.findByBook(bookUuid);
+        return questionService.retrieveQuestions(bookUuid);
     }
 }
