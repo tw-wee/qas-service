@@ -1,7 +1,6 @@
 package tw.wee.qas.controller;
 
 import static java.lang.String.format;
-import static java.util.Arrays.*;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -32,16 +31,13 @@ public class QuestionControllerIntegrationTest extends ApplicationIntegrationTes
     @Test
     public void should_get_questions_by_book_uuid() throws Exception {
         String bookUuid = "book123";
-        questionRepository.save(
-                asList(generateQuestion(bookUuid, "This is a question"),
-                        generateQuestion(bookUuid, "This is another question")));
+        questionRepository.save(generateQuestion(bookUuid, "This is a question"));
 
         mockMvc.perform(get(format("/questions/book/%s", bookUuid)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].book").value(bookUuid))
-                .andExpect(jsonPath("$[0].content").value("This is a question"))
-                .andExpect(jsonPath("$[1].content").value("This is another question"));
+                .andExpect(jsonPath("$[0].content").value("This is a question"));
     }
 
     private Question generateQuestion(String bookUuid, String questionContent) {

@@ -11,6 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
 @Transactional
-public class ApplicationIntegrationTest {
+public abstract class ApplicationIntegrationTest {
     protected MockMvc mockMvc;
 }
