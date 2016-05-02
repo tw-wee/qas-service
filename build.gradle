@@ -40,6 +40,7 @@ idea.project.vcs = "Git"
 
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-hateoas")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.apache.logging.log4j:log4j:$log4jVersion")
     compile("org.flywaydb:flyway-core:$flywayVersion")

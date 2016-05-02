@@ -6,9 +6,10 @@ import javax.persistence.MappedSuperclass;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.hateoas.ResourceSupport;
 
 @MappedSuperclass
-public abstract class Auditor {
+public abstract class Auditor extends ResourceSupport {
     @Column(name = "time_created", nullable = false, updatable = false)
     @CreatedDate
     private Date timeCreated = new Date();
