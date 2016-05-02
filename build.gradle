@@ -11,13 +11,6 @@ plugins {
     id "org.flywaydb.flyway" version "4.0"
 }
 
-flyway {
-    url = 'jdbc:mysql://localhost:3306/wee_qas?serverTimezone=UTC&useSSL=false'
-    user = 'root'
-    password = ''
-//    driver = 'com.mysql.cj.jdbc.Driver'
-}
-
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'spring-boot'
