@@ -33,16 +33,16 @@ build.dependsOn flywayMigrate
 
 
 jar {
-    baseName = 'qas-service'
-    version = '0.1.0'
+    baseName = "$jarBaseName"
+    version = "$jarVersion"
 }
 
 repositories {
     mavenCentral()
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+sourceCompatibility = "$javaVersion"
+targetCompatibility = "$javaVersion"
 idea.project.vcs = "Git"
 
 dependencies {
@@ -67,5 +67,5 @@ sourceSets {
 }
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '2.13'
+    gradleVersion = "$gradleVersion"
 }
