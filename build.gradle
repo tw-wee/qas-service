@@ -16,13 +16,6 @@ apply plugin: 'application'
 
 mainClassName = "tw.wee.qas.Application"
 
-defaultTasks 'clean', 'build'
-
-clean.dependsOn flywayRepair
-
-build.dependsOn flywayMigrate
-
-
 jar {
     baseName = "$jarBaseName"
     version = "$jarVersion"
@@ -36,6 +29,21 @@ sourceCompatibility = "$javaVersion"
 targetCompatibility = "$javaVersion"
 idea.project.vcs = "Git"
 
+sourceSets {
+    main {
+        java.srcDirs = ['src/main/java']
+        resources.srcDirs = ['src/main/resources']
+    }
+    test {
+        java.srcDirs = ['src/test/java']
+        resources.srcDirs = ['src/test/resources']
+    }
+    integrationTest {
+        java.srcDirs = ['src/integrationTest/java']
+        resources.srcDirs = ['src/integrationTest/resources']
+    }
+}
+
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-hateoas")
@@ -46,18 +54,23 @@ dependencies {
     compile("mysql:mysql-connector-java:$mysqlVersion")
     testCompile("com.jayway.jsonpath:json-path")
     testCompile("org.springframework.boot:spring-boot-starter-test")
+    integrationTestCompile sourceSets.main.output
+    integrationTestCompile sourceSets.test.output
+    integrationTestCompile configurations.testCompile
+    integrationTestRuntime configurations.testRuntime
 }
 
-sourceSets {
-    main {
-        java.srcDirs = ['src/main/java']
-        resources.srcDirs = ['src/main/resources']
-    }
-    test {
-        java.srcDirs = ['src/test/intg/java', 'src/test/unit/java']
-        resources.srcDirs = ['src/test/intg/resources', 'src/test/unit/resources']
-    }
+defaultTasks 'clean', 'build'
+
+clean.dependsOn flywayRepair
+build.dependsOn flywayMigrate
+
+task integrationTest(type: Test) {
+    testClassesDir = sourceSets.integrationTest.output.classesDir
+    classpath = sourceSets.integrationTest.runtimeClasspath
 }
+
+build.dependsOn integrationTest
 
 task wrapper(type: Wrapper) {
     gradleVersion = "$gradleVersion"

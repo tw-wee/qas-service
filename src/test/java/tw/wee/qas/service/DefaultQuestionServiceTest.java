@@ -1,11 +1,10 @@
 package tw.wee.qas.service;
 
-import static java.util.Arrays.*;
+import static java.util.Arrays.asList;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Before;

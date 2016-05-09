@@ -9,10 +9,13 @@ Questions &amp; Answers Service
 `./gradlew clean build`
 
 ### Run unit test
-
+`./gradlew test`
 
 ### Run integration test
+`./gradlew integrationTest` or `./gradlew iT`
 
+### Run build exclude integration test
+`./gradlew build -x integrationTest` or `./gradlew build -x iT`
 
 ### Start Application
 `./gradlew bootRun`
