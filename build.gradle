@@ -70,7 +70,7 @@ task integrationTest(type: Test) {
     classpath = sourceSets.integrationTest.runtimeClasspath
 }
 
-build.dependsOn integrationTest
+check.dependsOn integrationTest
 
 task wrapper(type: Wrapper) {
     gradleVersion = "$gradleVersion"
