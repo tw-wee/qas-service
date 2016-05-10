@@ -36,11 +36,17 @@ sourceSets {
     }
     test {
         java.srcDirs = ['src/test/java']
-        resources.srcDirs = ['src/test/resources']
+        resources.srcDirs = ['src/test/resources', 'src/integrationTest/resources']
     }
     integrationTest {
         java.srcDirs = ['src/integrationTest/java']
-        resources.srcDirs = ['src/integrationTest/resources']
+//        resources.srcDirs = ['src/integrationTest/resources']
+    }
+}
+
+idea {
+    module {
+        testSourceDirs += sourceSets.integrationTest.java.srcDirs
     }
 }
 
