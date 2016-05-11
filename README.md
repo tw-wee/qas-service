@@ -36,6 +36,7 @@ Questions &amp; Answers Service
 
 
 ### Load Swagger UI
+[http://localhost:8086/qas-service/swagger-ui.html](http://localhost:8086/qas-service/swagger-ui.html)
 
 
 ### Database & Flyway Migration
