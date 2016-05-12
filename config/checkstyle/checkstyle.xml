@@ -310,7 +310,9 @@
         <module name="IllegalType"/>
         <module name="DeclarationOrder" />
         <module name="ParameterAssignment" />
-        <module name="VisibilityModifier" />
+        <module name="VisibilityModifier">
+            <property name="protectedAllowed" value="true" />
+        </module>
         <module name="FinalClass" />
         <module name="InterfaceIsType" >
             <property name="allowMarkerInterfaces" value="true"/>
