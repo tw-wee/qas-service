@@ -5,6 +5,8 @@
 /.gradle
 /.idea
 
+*.cache
+
 *.ipr
 *.iml
 *.iws
