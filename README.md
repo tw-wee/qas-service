@@ -23,7 +23,7 @@ Questions &amp; Answers Service
 `./gradlew check`
 
 ### Run code coverage check
-`./gradlew jacocoTestReport`, it depends on `build` task.
+`./gradlew checkTestCoverage`, it depends on `build` task.
 To see the test coverage report: `open build/reports/jacoco/test/html/index.html`.
 
 ### Run findBugs
