@@ -89,6 +89,30 @@ task integrationTest(type: Test) {
 
 build.dependsOn integrationTest
 
+jacocoTestReport {
+    reports {
+        xml {
+            enabled true
+        }
+
+        html {
+            enabled true
+        }
+    }
+
+    afterEvaluate {
+        classDirectories = files(classDirectories.files.collect {
+            fileTree(dir: it,
+                    exclude: ['**/Application**',
+                              '**/Health**',
+                              '**/configuration/**',
+                              '**/controller/**',
+                              '**/domain/**',
+                              'repository/**'])
+        })
+    }
+}
+
 task checkTestCoverage << {
     def coverageReportPath = "build/reports/jacoco/test/html/index.html"
     def coverageFile = new File(coverageReportPath)
@@ -97,14 +121,15 @@ task checkTestCoverage << {
 
     def lineCoverageString = coverageString.tr.td[2].text()
     def branchCoverageString = coverageString.tr.td[4].text()
-    def actualLineCoverage = lineCoverageString.substring(0,lineCoverageString.length() - 1)
+    def actualLineCoverage = lineCoverageString.substring(0,lineCoverageString.length() - 1).toInteger()
     def actualBranchCoverage = branchCoverageString.substring(0,branchCoverageString.length() - 1)
 
-    if(actualLineCoverage < expectedLineCoverage) {
+    if(actualLineCoverage < expectedLineCoverage.toInteger()) {
         throw new RuntimeException("Code line coverage is "+actualLineCoverage+"%, but expected is "+expectedLineCoverage+"%.\n"+"Please check "+coverageReportPath +" for more detail.")
     }
 
-    if(actualBranchCoverage < expectedBranchCoverage) {
+    actualBranchCoverage = actualBranchCoverage.isInteger() ? actualBranchCoverage.toInteger() : expectedBranchCoverage.toInteger()
+    if(actualBranchCoverage < expectedBranchCoverage.toInteger()) {
         throw new RuntimeException("Code branch coverage is "+actualBranchCoverage+"%, but expected is "+expectedBranchCoverage+"%.\n"+"Please check "+coverageReportPath +" for more detail.")
     }
 }
