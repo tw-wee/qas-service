@@ -76,11 +76,10 @@ defaultTasks 'clean', 'build'
 //checkstyleTest.exclude '**/*.*'
 //checkstyleIntegrationTest.exclude '**/*.*'
 
-//checkstyleMain.dependsOn checkstyleTest
-//checkstyleMain.dependsOn checkstyleIntegrationTest
 
 clean.dependsOn flywayRepair
 build.dependsOn flywayMigrate
+
 
 task integrationTest(type: Test) {
     testClassesDir = sourceSets.integrationTest.output.classesDir
@@ -89,26 +88,23 @@ task integrationTest(type: Test) {
 
 build.dependsOn integrationTest
 
+
 jacocoTestReport {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports after running tests."
     reports {
-        xml {
-            enabled true
-        }
-
-        html {
-            enabled true
-        }
+        html.enabled true
+        xml.enabled true
+        csv.enabled false
     }
-
     afterEvaluate {
         classDirectories = files(classDirectories.files.collect {
-            fileTree(dir: it,
-                    exclude: ['**/Application**',
-                              '**/Health**',
-                              '**/configuration/**',
-                              '**/controller/**',
-                              '**/domain/**',
-                              'repository/**'])
+            fileTree(dir: it, exclude: ['**/Application**',
+                                        '**/Health**',
+                                        '**/configuration/**',
+                                        '**/controller/**',
+                                        '**/domain/**',
+                                        'repository/**'])
         })
     }
 }
@@ -136,6 +132,7 @@ task checkTestCoverage << {
 
 checkTestCoverage.dependsOn jacocoTestReport
 build.dependsOn checkTestCoverage
+
 
 task wrapper(type: Wrapper) {
     gradleVersion = "$gradleVersion"
