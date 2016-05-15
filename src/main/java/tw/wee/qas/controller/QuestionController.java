@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import tw.wee.qas.domain.Question;
+import tw.wee.qas.entity.QuestionEntity;
 import tw.wee.qas.service.QuestionService;
 
 @RestController
@@ -19,7 +19,7 @@ public class QuestionController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/book/{bookUuid}")
     public ResponseEntity<?> retrieveQuestions(@PathVariable String bookUuid) {
-        Iterable<Question> questions = questionService.retrieveQuestions(bookUuid);
+        Iterable<QuestionEntity> questions = questionService.retrieveQuestions(bookUuid);
         return new ResponseEntity<>(questions, HttpStatus.OK);
     }
 }

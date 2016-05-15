@@ -1,4 +1,4 @@
-package tw.wee.qas.domain;
+package tw.wee.qas.entity;
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -9,7 +9,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.hateoas.ResourceSupport;
 
 @MappedSuperclass
-public abstract class Auditor extends ResourceSupport {
+public abstract class AuditorEntity extends ResourceSupport {
     @Column(name = "time_created", nullable = false, updatable = false)
     @CreatedDate
     private Date timeCreated = new Date();

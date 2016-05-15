@@ -13,7 +13,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import tw.wee.qas.domain.Question;
+import tw.wee.qas.entity.QuestionEntity;
 import tw.wee.qas.repository.QuestionRepository;
 
 public class DefaultQuestionServiceTest {
@@ -32,10 +32,10 @@ public class DefaultQuestionServiceTest {
     @Test
     public void should_retrieve_questions_by_book_uuid() {
         String bookUuid = "book123456";
-        List<Question> expectedQuestions = asList(new Question(), new Question());
+        List<QuestionEntity> expectedQuestions = asList(new QuestionEntity(), new QuestionEntity());
         when(questionRepository.findByBook(bookUuid)).thenReturn(expectedQuestions);
 
-        Iterable<Question> questions = questionService.retrieveQuestions(bookUuid);
+        Iterable<QuestionEntity> questions = questionService.retrieveQuestions(bookUuid);
 
         assertThat(questions, is(expectedQuestions));
     }

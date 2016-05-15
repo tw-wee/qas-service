@@ -13,15 +13,15 @@ jacocoTestReport {
             fileTree(dir: it, exclude: ['**/Application**',
                                         '**/Health**',
                                         '**/configuration/**',
-                                        '**/controller/**',
                                         '**/domain/**',
-                                        'repository/**'])
+                                        '**/entity/**',
+                                        '**/repository/**'])
         })
     }
 }
 
 task checkTestCoverage << {
-    def coverageReportPath = "$buildDir/reports/jacoco/test/html/index.html"
+    def coverageReportPath = "build/reports/jacoco/test/html/index.html"
     def coverageFile = new File(coverageReportPath)
     def matcher = ( coverageFile.text =~ /<tfoot>(.*)<\/tfoot>/ )
     def coverageString = new XmlParser().parseText(matcher[0][0])
@@ -32,11 +32,11 @@ task checkTestCoverage << {
     def actualBranchCoverage = branchCoverageString.substring(0,branchCoverageString.length() - 1)
 
     if(actualLineCoverage.isInteger() && actualLineCoverage.toInteger() < expectedLineCoverage.toInteger()) {
-        throw new RuntimeException("Code line coverage is "+actualLineCoverage+"%, but expected is "+expectedLineCoverage+"%.\n"+"Please check "+coverageReportPath +" for more detail.")
+        throw new RuntimeException("Code line coverage is " + actualLineCoverage + "%, but expected is " + expectedLineCoverage + "%.\n" + "Please check " + coverageReportPath + " for more detail.")
     }
 
     if(actualBranchCoverage.isInteger() && actualBranchCoverage.toInteger() < expectedBranchCoverage.toInteger()) {
-        throw new RuntimeException("Code branch coverage is "+actualBranchCoverage+"%, but expected is "+expectedBranchCoverage+"%.\n"+"Please check "+coverageReportPath +" for more detail.")
+        throw new RuntimeException("Code branch coverage is " + actualBranchCoverage + "%, but expected is " + expectedBranchCoverage + "%.\n" + "Please check " + coverageReportPath + " for more detail.")
     }
 }
 

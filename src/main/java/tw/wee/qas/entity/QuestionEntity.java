@@ -1,19 +1,20 @@
-package tw.wee.qas.domain;
+package tw.wee.qas.entity;
 
+import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "wee_answer")
-public class Answer extends Auditor {
+@Table(name = "wee_question")
+public class QuestionEntity extends AuditorEntity {
     @Id
-    @Column(name = "uuid", nullable = false, length = 64)
-    private String uuid;
+    @Column(name = "uuid", nullable = false, length = 64, updatable = false)
+    private String uuid = UUID.randomUUID().toString();
 
-    @Column(name = "question", nullable = false, length = 64)
-    private String question;
+    @Column(name = "book", nullable = false, length = 64)
+    private String book;
 
     @Column(name = "content", nullable = false)
     private String content;
@@ -26,12 +27,12 @@ public class Answer extends Auditor {
         this.uuid = uuid;
     }
 
-    public String getQuestion() {
-        return question;
+    public String getBook() {
+        return book;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setBook(String book) {
+        this.book = book;
     }
 
     public String getContent() {

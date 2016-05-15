@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import tw.wee.qas.ApplicationIntegrationTest;
-import tw.wee.qas.domain.Question;
+import tw.wee.qas.entity.QuestionEntity;
 import tw.wee.qas.repository.QuestionRepository;
 
 public class QuestionControllerIntegrationTest extends ApplicationIntegrationTest {
@@ -40,8 +40,8 @@ public class QuestionControllerIntegrationTest extends ApplicationIntegrationTes
                 .andExpect(jsonPath("$[0].content").value("This is a question"));
     }
 
-    private Question generateQuestion(String bookUuid, String questionContent) {
-        Question question = new Question();
+    private QuestionEntity generateQuestion(String bookUuid, String questionContent) {
+        QuestionEntity question = new QuestionEntity();
         question.setBook(bookUuid);
         question.setContent(questionContent);
         return question;
