@@ -1,7 +1,9 @@
 package tw.wee.qas.service;
 
-import tw.wee.qas.entity.QuestionEntity;
+import java.util.List;
+
+import tw.wee.qas.domain.Question;
 
 public interface QuestionService {
-    Iterable<QuestionEntity> retrieveQuestions(String bookUuid);
+    List<Question> retrieveQuestions(String bookId);
 }

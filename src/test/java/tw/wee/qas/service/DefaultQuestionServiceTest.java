@@ -12,8 +12,11 @@ import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.test.util.ReflectionTestUtils;
 
+import tw.wee.qas.domain.Question;
 import tw.wee.qas.entity.QuestionEntity;
+import tw.wee.qas.mapper.QuestionMapper;
 import tw.wee.qas.repository.QuestionRepository;
 
 public class DefaultQuestionServiceTest {
@@ -27,16 +30,28 @@ public class DefaultQuestionServiceTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
+        ReflectionTestUtils.setField(questionService, "mapper", new QuestionMapper());
     }
 
     @Test
-    public void should_retrieve_questions_by_book_uuid() {
-        String bookUuid = "book123456";
-        List<QuestionEntity> expectedQuestions = asList(new QuestionEntity(), new QuestionEntity());
-        when(questionRepository.findByBook(bookUuid)).thenReturn(expectedQuestions);
+    public void should_retrieve_questions_by_book_id() {
+        String bookId = "book123456";
+        List<QuestionEntity> questionEntities = asList(
+                createQuestionEntity(bookId, "Question One"),
+                createQuestionEntity(bookId, "Question Two"));
+        when(questionRepository.findByBookId(bookId)).thenReturn(questionEntities);
 
-        Iterable<QuestionEntity> questions = questionService.retrieveQuestions(bookUuid);
+        List<Question> questions = questionService.retrieveQuestions(bookId);
 
-        assertThat(questions, is(expectedQuestions));
+        assertThat(questions.size(), is(2));
+        assertThat(questions.get(0).getBookId(), is(bookId));
+        assertThat(questions.get(0).getContent(), is("Question One"));
+    }
+
+    private QuestionEntity createQuestionEntity(String bookId, String content) {
+        QuestionEntity questionEntity = new QuestionEntity();
+        questionEntity.setBookId(bookId);
+        questionEntity.setContent(content);
+        return questionEntity;
     }
 }

@@ -14,7 +14,7 @@ public class QuestionEntity extends AuditorEntity {
     private String uuid = UUID.randomUUID().toString();
 
     @Column(name = "book", nullable = false, length = 64)
-    private String book;
+    private String bookId;
 
     @Column(name = "content", nullable = false)
     private String content;
@@ -23,16 +23,12 @@ public class QuestionEntity extends AuditorEntity {
         return uuid;
     }
 
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public String getBookId() {
+        return bookId;
     }
 
-    public String getBook() {
-        return book;
-    }
-
-    public void setBook(String book) {
-        this.book = book;
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
     }
 
     public String getContent() {
