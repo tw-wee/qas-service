@@ -1,0 +1,16 @@
+version: '1'
+services:
+  auth:
+    build: .
+    container_name: qas-node
+    command: ["start-qas.sh"]
+    ports:
+      - "8087:8087"
+    networks:
+      - wee-net
+    volumes:
+      - ../dist:/app
+
+networks:
+  wee-net:
+    driver: bridge
