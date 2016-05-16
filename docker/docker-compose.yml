@@ -5,7 +5,7 @@ services:
     container_name: qas-node
     command: ["start-qas.sh"]
     ports:
-      - "8087:8087"
+      - "8086:8086"
     networks:
       - wee-net
     volumes:
