@@ -28,6 +28,7 @@ public class DefaultQuestionService implements QuestionService {
 
     @Override
     public Question findQuestionById(String questionId) {
-        return null;
+        QuestionEntity questionEntity = questionRepository.findOne(questionId);
+        return mapper.map(questionEntity, Question.class);
     }
 }

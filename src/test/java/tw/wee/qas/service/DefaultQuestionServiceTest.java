@@ -48,6 +48,18 @@ public class DefaultQuestionServiceTest {
         assertThat(questions.get(0).getContent(), is("Question One"));
     }
 
+    @Test
+    public void should_find_question_by_question_id() {
+        QuestionEntity questionEntity = createQuestionEntity("book id", "This is a question!");
+        when(questionRepository.findOne(questionEntity.getUuid())).thenReturn(questionEntity);
+
+        Question question = questionService.findQuestionById(questionEntity.getUuid());
+
+        assertThat(question.getUuid(), is(questionEntity.getUuid()));
+        assertThat(question.getBookId(), is(questionEntity.getBookId()));
+        assertThat(question.getContent(), is(questionEntity.getContent()));
+    }
+
     private QuestionEntity createQuestionEntity(String bookId, String content) {
         QuestionEntity questionEntity = new QuestionEntity();
         questionEntity.setBookId(bookId);
