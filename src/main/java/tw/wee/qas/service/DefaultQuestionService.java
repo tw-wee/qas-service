@@ -25,4 +25,9 @@ public class DefaultQuestionService implements QuestionService {
         List<QuestionEntity> questionEntities = questionRepository.findByBookId(bookId);
         return mapper.mapList(questionEntities, Question.class);
     }
+
+    @Override
+    public Question findQuestionById(String questionId) {
+        return null;
+    }
 }

@@ -6,4 +6,6 @@ import tw.wee.qas.domain.Question;
 
 public interface QuestionService {
     List<Question> retrieveQuestions(String bookId);
+
+    Question findQuestionById(String questionId);
 }

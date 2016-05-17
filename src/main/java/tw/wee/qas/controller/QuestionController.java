@@ -24,4 +24,10 @@ public class QuestionController {
         List<Question> questions = questionService.retrieveQuestions(bookId);
         return new ResponseEntity<>(questions, HttpStatus.OK);
     }
+
+
+    public ResponseEntity<?> findQuestionById(String questionId) {
+        Question question = questionService.findQuestionById(questionId);
+        return new ResponseEntity<>(question, HttpStatus.OK);
+    }
 }

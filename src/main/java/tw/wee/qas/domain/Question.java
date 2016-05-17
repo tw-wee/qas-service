@@ -5,6 +5,12 @@ public class Question {
     private String bookId;
     private String content;
 
+    public Question(String uuid, String bookId, String content) {
+        this.uuid = uuid;
+        this.bookId = bookId;
+        this.content = content;
+    }
+
     public String getUuid() {
         return uuid;
     }
