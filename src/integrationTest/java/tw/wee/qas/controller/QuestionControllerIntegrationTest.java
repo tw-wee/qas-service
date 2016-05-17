@@ -40,6 +40,18 @@ public class QuestionControllerIntegrationTest extends ApplicationIntegrationTes
                 .andExpect(jsonPath("$[0].content").value("This is a question"));
     }
 
+    @Test
+    public void should_find_question_by_id() throws Exception {
+        QuestionEntity savedQuestion = questionRepository.save(
+                generateQuestion("book id", "This is a Question!"));
+
+        mockMvc.perform(get(format("/questions/%s", savedQuestion.getUuid())))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.uuid").value(savedQuestion.getUuid()))
+                .andExpect(jsonPath("$.bookId").value(savedQuestion.getBookId()))
+                .andExpect(jsonPath("$.content").value(savedQuestion.getContent()));
+    }
+
     private QuestionEntity generateQuestion(String bookId, String content) {
         QuestionEntity question = new QuestionEntity();
         question.setBookId(bookId);
