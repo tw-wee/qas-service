@@ -16,6 +16,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 
 import tw.wee.qas.domain.Question;
 import tw.wee.qas.entity.QuestionEntity;
+import tw.wee.qas.exception.QuestionNotFoundException;
 import tw.wee.qas.mapper.QuestionMapper;
 import tw.wee.qas.repository.QuestionRepository;
 
@@ -58,6 +59,14 @@ public class DefaultQuestionServiceTest {
         assertThat(question.getUuid(), is(questionEntity.getUuid()));
         assertThat(question.getBookId(), is(questionEntity.getBookId()));
         assertThat(question.getContent(), is(questionEntity.getContent()));
+    }
+
+    @Test(expected = QuestionNotFoundException.class)
+    public void should_throw_exception_when_not_find_question_by_id() {
+        String questionId = "1234";
+        when(questionRepository.findOne(questionId)).thenReturn(null);
+
+        questionService.findQuestionById(questionId);
     }
 
     private QuestionEntity createQuestionEntity(String bookId, String content) {
