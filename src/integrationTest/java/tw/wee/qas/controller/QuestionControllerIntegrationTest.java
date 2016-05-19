@@ -29,11 +29,11 @@ public class QuestionControllerIntegrationTest extends ApplicationIntegrationTes
     }
 
     @Test
-    public void should_get_questions_by_book_uuid() throws Exception {
+    public void should_get_questions_by_book_id() throws Exception {
         String bookId = "book123";
         questionRepository.save(generateQuestion(bookId, "This is a question"));
 
-        mockMvc.perform(get(format("/questions/book/%s", bookId)))
+        mockMvc.perform(get(format("/questions?book=%s", bookId)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].bookId").value(bookId))
