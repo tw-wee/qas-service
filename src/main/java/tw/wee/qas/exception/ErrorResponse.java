@@ -4,46 +4,36 @@ import java.util.Date;
 
 public class ErrorResponse {
     private long timestamp;
-    private int httpStatus;
-    private ErrorCode errorCode;
-    private String errorMessage;
+    private int status;
+    private String error;
+    private ErrorCode code;
+    private String message;
 
-    public ErrorResponse(int httpStatus, ErrorCode errorCode, String errorMessage) {
+    public ErrorResponse(BaseException ex) {
         this.timestamp = new Date().getTime();
-        this.httpStatus = httpStatus;
-        this.errorCode = errorCode;
-        this.errorMessage = errorMessage;
+        this.status = ex.getStatus().value();
+        this.error = ex.getStatus().getReasonPhrase();
+        this.code = ex.getErrorCode();
+        this.message = ex.getErrorMessage();
     }
 
     public long getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
-        this.timestamp = timestamp;
+    public ErrorCode getCode() {
+        return code;
     }
 
-    public ErrorCode getErrorCode() {
-        return errorCode;
+    public String getMessage() {
+        return message;
     }
 
-    public void setErrorCode(ErrorCode errorCode) {
-        this.errorCode = errorCode;
+    public int getStatus() {
+        return status;
     }
 
-    public String getErrorMessage() {
-        return errorMessage;
-    }
-
-    public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
-    }
-
-    public int getHttpStatus() {
-        return httpStatus;
-    }
-
-    public void setHttpStatus(int httpStatus) {
-        this.httpStatus = httpStatus;
+    public String getError() {
+        return error;
     }
 }

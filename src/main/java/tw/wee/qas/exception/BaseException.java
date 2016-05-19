@@ -14,7 +14,7 @@ public class BaseException extends RuntimeException {
     }
 
     protected BaseException(HttpStatus status, ErrorCode errorCode) {
-        this(status, errorCode, errorCode.toString());
+        this(status, errorCode, errorCode.toString().toLowerCase());
     }
 
     protected BaseException(HttpStatus status, ErrorCode errorCode, String errorMessage) {

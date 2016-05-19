@@ -8,9 +8,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class GlobalExceptionHandler {
     @ExceptionHandler(BaseException.class)
     public ResponseEntity<?> handleException(BaseException ex) {
-        ErrorResponse errorResponse = new ErrorResponse(ex.getStatus().value(),
-                ex.getErrorCode(), ex.getErrorMessage());
-
-        return new ResponseEntity<>(errorResponse, ex.getStatus());
+        return new ResponseEntity<>(new ErrorResponse(ex), ex.getStatus());
     }
 }

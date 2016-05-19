@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import tw.wee.qas.domain.Question;
 import tw.wee.qas.entity.QuestionEntity;
-import tw.wee.qas.exception.QuestionNotFoundException;
+import tw.wee.qas.exception.NotFoundException;
 import tw.wee.qas.mapper.QuestionMapper;
 import tw.wee.qas.repository.QuestionRepository;
 
@@ -31,7 +31,8 @@ public class DefaultQuestionService implements QuestionService {
     @Override
     public Question findQuestionById(String questionId) {
         QuestionEntity questionEntity = questionRepository.findOne(questionId);
-        Optional.ofNullable(questionEntity).orElseThrow(() -> new QuestionNotFoundException());
+        Optional.ofNullable(questionEntity).orElseThrow(() ->
+                new NotFoundException("Question is not found!"));
         return mapper.map(questionEntity, Question.class);
     }
 }
