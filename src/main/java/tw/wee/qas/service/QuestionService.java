@@ -8,4 +8,6 @@ public interface QuestionService {
     List<Question> retrieveQuestions(String bookId);
 
     Question findQuestionById(String questionId);
+
+    List<Question> searchQuestions(String keyword);
 }

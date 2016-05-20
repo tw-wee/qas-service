@@ -35,4 +35,9 @@ public class DefaultQuestionService implements QuestionService {
                 new NotFoundException("Question is not found!"));
         return mapper.map(questionEntity, Question.class);
     }
+
+    @Override
+    public List<Question> searchQuestions(String keyword) {
+        return null;
+    }
 }

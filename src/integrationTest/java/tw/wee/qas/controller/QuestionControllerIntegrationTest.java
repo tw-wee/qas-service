@@ -33,7 +33,7 @@ public class QuestionControllerIntegrationTest extends ApplicationIntegrationTes
         String bookId = "book123";
         questionRepository.save(generateQuestion(bookId, "This is a question"));
 
-        mockMvc.perform(get(format("/questions?book=%s", bookId)))
+        mockMvc.perform(get(format("/books/%s/questions", bookId)))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(1)))
                 .andExpect(jsonPath("$[0].bookId").value(bookId))
@@ -50,6 +50,14 @@ public class QuestionControllerIntegrationTest extends ApplicationIntegrationTes
                 .andExpect(jsonPath("$.uuid").value(savedQuestion.getUuid()))
                 .andExpect(jsonPath("$.bookId").value(savedQuestion.getBookId()))
                 .andExpect(jsonPath("$.content").value(savedQuestion.getContent()));
+    }
+
+    @Test
+    public void should_search_questions_by_keyword() throws Exception {
+        String keyword = "test";
+        mockMvc.perform(get(format("/questions?keyword=%s", keyword)))
+                .andExpect(status().isOk());
+
     }
 
     private QuestionEntity generateQuestion(String bookId, String content) {
