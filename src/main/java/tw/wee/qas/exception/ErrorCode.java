@@ -25,13 +25,13 @@ public enum ErrorCode {
     // unknown error
     UNKNOWN(0);
 
-    private final int code;
+    private final int value;
 
-    ErrorCode(int code) {
-        this.code = code;
+    ErrorCode(int value) {
+        this.value = value;
     }
 
-    public int getCode() {
-        return code;
+    public int value() {
+        return this.value;
     }
 }
