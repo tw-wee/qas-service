@@ -8,4 +8,6 @@ import tw.wee.qas.entity.QuestionEntity;
 
 public interface QuestionRepository extends CrudRepository<QuestionEntity, String> {
     List<QuestionEntity> findByBookId(String bookId);
+
+    List<QuestionEntity> findByContentContains(String keyword);
 }

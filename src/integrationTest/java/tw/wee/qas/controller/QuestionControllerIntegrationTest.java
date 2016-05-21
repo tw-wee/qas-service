@@ -1,14 +1,14 @@
 package tw.wee.qas.controller;
 
 import static java.lang.String.format;
-import static org.hamcrest.Matchers.contains;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import org.hamcrest.Matcher;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -55,15 +55,18 @@ public class QuestionControllerIntegrationTest extends ApplicationIntegrationTes
     }
 
     @Test
-    @Ignore
-    public void should_search_questions_by_keyword() throws Exception {
-        questionRepository.save(generateQuestion("book id", "This is a test question"));
+    public void should_search_questions_by_keyword_ignore_cases() throws Exception {
+        questionRepository.save(generateQuestion("book id", "This is an old question"));
+        questionRepository.save(generateQuestion("book123", "This is a new question"));
+        questionRepository.save(generateQuestion("book456", "This is another new question"));
 
-        String keyword = "test";
+        String keyword = "NEW";
+        Matcher<String> keywordMatcher = containsString(keyword.toLowerCase());
         mockMvc.perform(get(format("/questions?keyword=%s", keyword)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].content").value(contains(keyword)));
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].content").value(keywordMatcher))
+                .andExpect(jsonPath("$[1].content").value(keywordMatcher));
 
     }
 

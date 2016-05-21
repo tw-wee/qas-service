@@ -2,6 +2,7 @@ package tw.wee.qas.service;
 
 import static java.util.Arrays.asList;
 import static org.hamcrest.core.Is.is;
+import static org.hamcrest.core.StringContains.containsString;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -67,6 +68,21 @@ public class DefaultQuestionServiceTest {
         when(questionRepository.findOne(questionId)).thenReturn(null);
 
         questionService.findQuestionById(questionId);
+    }
+
+    @Test
+    public void should_search_question_given_keyword() {
+        String keyword = "test";
+        List<QuestionEntity> questionEntities = asList(
+                createQuestionEntity("123", "a test question"),
+                createQuestionEntity("456", "another test question"));
+        when(questionRepository.findByContentContains(keyword)).thenReturn(questionEntities);
+
+        List<Question> questions = questionService.searchQuestions(keyword);
+
+        assertThat(questions.size(), is(2));
+        assertThat(questions.get(0).getContent(), containsString(keyword));
+        assertThat(questions.get(1).getContent(), containsString(keyword));
     }
 
     private QuestionEntity createQuestionEntity(String bookId, String content) {
