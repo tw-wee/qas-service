@@ -1,12 +1,14 @@
 package tw.wee.qas.controller;
 
 import static java.lang.String.format;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -53,10 +55,15 @@ public class QuestionControllerIntegrationTest extends ApplicationIntegrationTes
     }
 
     @Test
+    @Ignore
     public void should_search_questions_by_keyword() throws Exception {
+        questionRepository.save(generateQuestion("book id", "This is a test question"));
+
         String keyword = "test";
         mockMvc.perform(get(format("/questions?keyword=%s", keyword)))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].content").value(contains(keyword)));
 
     }
 
