@@ -4,7 +4,7 @@ server:
 
 spring:
   datasource: # Database properties
-    url: jdbc:mysql://localhost:3306/wee_qas?useSSL=false
+    url: jdbc:mysql://localhost:3306/wee_qas?serverTimezone=UTC&useSSL=true
     username: root
     password:
     #driverClassName: com.mysql.cj.jdbc.Driver
