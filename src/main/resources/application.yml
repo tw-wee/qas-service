@@ -4,16 +4,13 @@ server:
 
 spring:
   datasource: # Database properties
-    url: jdbc:mysql://localhost:3306/wee_qas?serverTimezone=UTC&useSSL=true
-    username: root
+    url: jdbc:h2:file:./tmp/wee_qas
+    username: sa
     password:
-    #driverClassName: com.mysql.cj.jdbc.Driver
   jpa: # JPA configuration
     show-sql: true
     hibernate:
       ddl-auto: validate
-    #database-platform: org.hibernate.dialect.MySQL5Dialect
-
 
 flyway: # Flyway properties
   url: ${spring.datasource.url}

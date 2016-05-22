@@ -19,3 +19,4 @@ flyway: # Flyway properties
   url: ${spring.datasource.url}
   user: ${spring.datasource.username}
   password: ${spring.datasource.password}
+  #driver = ${spring.datasource.driverClassName}

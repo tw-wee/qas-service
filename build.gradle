@@ -18,7 +18,7 @@ apply plugin: 'checkstyle'
 //apply plugin: 'findbugs'
 apply plugin: 'docker'
 apply from: 'jacoco.gradle'
-apply from: 'database.gradle'
+//apply from: 'database.gradle'
 
 group = 'tw-wee'
 mainClassName = "tw.wee.qas.Application"
@@ -51,6 +51,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-hateoas")
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("com.h2database:h2")
     compile("org.apache.logging.log4j:log4j:$log4jVersion")
     compile("org.flywaydb:flyway-core:$flywayVersion")
     compile("mysql:mysql-connector-java:$mysqlVersion")
@@ -66,7 +67,7 @@ defaultTasks 'clean', 'build'
 //checkstyleTest.exclude '**/*.*'
 //checkstyleIntegrationTest.exclude '**/*.*'
 
-clean.dependsOn createDB
+//clean.dependsOn createDB
 clean.dependsOn flywayRepair
 build.dependsOn flywayMigrate
 
