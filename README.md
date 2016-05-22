@@ -77,4 +77,6 @@ drop database:
 
 [More about using flyway](https://flywaydb.org/documentation/gradle/): `flywayInfo`, `flywayValidate`, `flywayBaseline`
 
-
+### Docker
+`./gradlew buildDocker`
+`docker run -p 8086:8086 -t tw-wee/qas-service`
