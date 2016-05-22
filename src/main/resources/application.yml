@@ -4,9 +4,7 @@ server:
 
 spring:
   datasource: # Database properties
-    url: jdbc:h2:file:./.tmp/wee_qas
-    username: sa
-    password:
+    url: jdbc:h2:mem:wee_qas
   jpa: # JPA configuration
     show-sql: true
     hibernate:
@@ -14,5 +12,3 @@ spring:
 
 flyway: # Flyway properties
   url: ${spring.datasource.url}
-  user: ${spring.datasource.username}
-  password: ${spring.datasource.password}
