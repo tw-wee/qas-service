@@ -1,5 +1,7 @@
 FROM debian:jessie
-RUN add-apt-repository ppa:openjdk-r/ppa \
+RUN apt-get update \
+    && apt-get install -y python-software-properties software-properties-common \
+    && add-apt-repository ppa:openjdk-r/ppa \
     && apt-get update \
     && apt-get install -y openjdk-8-jdk \
     && java --version
