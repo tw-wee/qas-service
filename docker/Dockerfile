@@ -1,7 +1,6 @@
 FROM debian:jessie
-RUN apt-get update \
-    && apt-get install -y openjdk8 \
-    && apt-get install -y mysql
+RUN add-apt-repository ppa:openjdk-r/ppa && apt-get update \
+    apt-get install -y openjdk-8-jdk
 VOLUME /tmp
 ADD qas-service-0.1.0.jar app.jar
 RUN sh -c 'touch /app.jar'

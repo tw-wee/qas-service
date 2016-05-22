@@ -80,8 +80,7 @@ task integrationTest(type: Test) {
 build.dependsOn integrationTest
 
 
-//task buildDocker(type: Docker, dependsOn: build) {
-task buildDocker(type: Docker) {
+task buildDocker(type: Docker, dependsOn: build) {
     push = true
     applicationName = jar.baseName
     dockerfile = file('docker/Dockerfile')
