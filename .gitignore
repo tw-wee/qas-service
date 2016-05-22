@@ -4,7 +4,7 @@
 /build
 /.gradle
 /.idea
-/tmp
+/.tmp
 
 *.cache
 

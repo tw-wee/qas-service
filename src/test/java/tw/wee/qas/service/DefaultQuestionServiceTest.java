@@ -76,7 +76,7 @@ public class DefaultQuestionServiceTest {
         List<QuestionEntity> questionEntities = asList(
                 createQuestionEntity("123", "a test question"),
                 createQuestionEntity("456", "another test question"));
-        when(questionRepository.findByContentContains(keyword)).thenReturn(questionEntities);
+        when(questionRepository.findByContentContainingIgnoreCase(keyword)).thenReturn(questionEntities);
 
         List<Question> questions = questionService.searchQuestions(keyword);
 

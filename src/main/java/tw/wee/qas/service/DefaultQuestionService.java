@@ -38,7 +38,7 @@ public class DefaultQuestionService implements QuestionService {
 
     @Override
     public List<Question> searchQuestions(String keyword) {
-        List<QuestionEntity> questionEntities = questionRepository.findByContentContains(keyword);
+        List<QuestionEntity> questionEntities = questionRepository.findByContentContainingIgnoreCase(keyword);
         return mapper.mapList(questionEntities, Question.class);
     }
 }
