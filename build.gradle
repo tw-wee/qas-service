@@ -18,6 +18,7 @@ apply plugin: 'checkstyle'
 //apply plugin: 'findbugs'
 apply plugin: 'docker'
 apply from: 'jacoco.gradle'
+apply from: 'database.gradle'
 
 group = 'tw-wee'
 mainClassName = "tw.wee.qas.Application"
@@ -65,7 +66,7 @@ defaultTasks 'clean', 'build'
 //checkstyleTest.exclude '**/*.*'
 //checkstyleIntegrationTest.exclude '**/*.*'
 
-
+clean.dependsOn createDB
 clean.dependsOn flywayRepair
 build.dependsOn flywayMigrate
 

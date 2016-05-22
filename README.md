@@ -8,7 +8,7 @@ Questions &amp; Answers Service
 `./gradlew cleanIdea idea`
 
 ### Run clean and build tasks
-`./gradlew clean build`
+`./gradlew clean build`, will auto create database
 
 ### Run unit test
 `./gradlew test`, it depends on `build` task.
@@ -54,6 +54,11 @@ To see the test coverage report: `open build/reports/jacoco/test/html/index.html
 ### Database & Flyway Migration
 1. Should Install Mysql in local
 2. Create schema using script in `create_db.sql`
+Or just run:
+`./gradlew createDB`, dependsOn `./gradlew clean`
+
+drop database:
+`./gradlew dropDB`
 
 #### Commands tips:
 - Run `./gradlew flywayRepair` to repair the Flyway metadata table
