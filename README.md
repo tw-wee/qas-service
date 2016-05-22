@@ -52,8 +52,12 @@ To see the test coverage report: `open build/reports/jacoco/test/html/index.html
 
 
 ### Database & Flyway Migration
+
+Already used the H2 embedded database, no need to follow below steps:
+
 1. Should Install Mysql in local
 2. Create schema using script in `create_db.sql`
+
 Or just run:
 `./gradlew createDB`, dependsOn `./gradlew clean`
 
