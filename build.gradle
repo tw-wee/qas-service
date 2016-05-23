@@ -20,7 +20,6 @@ apply plugin: 'docker'
 apply from: 'jacoco.gradle'
 //apply from: 'database.gradle'
 
-group = 'tw-wee'
 mainClassName = "tw.wee.qas.Application"
 
 jar {
@@ -81,9 +80,9 @@ task integrationTest(type: Test) {
 }
 build.dependsOn integrationTest
 
-
+group = 'twwee'
 task buildDocker(type: Docker, dependsOn: build) {
-    push = false
+    push = true
     applicationName = jar.baseName
     dockerfile = file('docker/Dockerfile')
     doFirst {
