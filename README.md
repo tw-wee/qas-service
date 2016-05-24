@@ -77,6 +77,48 @@ drop database:
 
 [More about using flyway](https://flywaydb.org/documentation/gradle/): `flywayInfo`, `flywayValidate`, `flywayBaseline`
 
-### Docker
+### Build Dockerfile
+Build docker image using gradle:
 `./gradlew buildDocker`
-`docker run -p 8086:8086 -t tw-wee/qas-service`
+
+Build docker image and push to `twwee/qas-service`:
+`./gradlew buildDocker -Ppush`
+
+Build docker image using docker:
+`cp build/libs/qas-service-0.1.0.jar docker && cd docker`
+
+`docker build .`
+
+If run service using docker:
+`docker run -p 8086:8086 -t twwee/qas-service`
+
+#### Using Docker Compose
+Firstly, goto the docker directory:
+`cd docker`
+
+Run Docker Compose:
+`docker-compose up`
+
+If want to run in background:
+`docker-compose up -d`
+
+Check the status:
+`docker-compose ps`
+
+Stop docker services:
+`docker-compose stop`
+
+View the logs (press CTRL+C to exit):
+`docker-compose logs`
+
+Kill the containers and remove them:
+```
+docker-compose kill
+docker-compose rm -f
+```
+
+More options:
+`docker-compose --help`
+
+If on Mac and using default docker-machine, try to hit:
+[http://192.168.99.100:8086/qas-service/swagger-ui.html](http://192.168.99.100:8086/qas-service/swagger-ui.html)

@@ -1,9 +1,10 @@
-version: '1'
+version: '2'
+
 services:
-  auth:
+  qas:
     build: .
+    image: twwee/qas-service
     container_name: qas-node
-    command: ["start-qas.sh"]
     ports:
       - "8086:8086"
     networks:

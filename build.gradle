@@ -82,7 +82,8 @@ build.dependsOn integrationTest
 
 group = 'twwee'
 task buildDocker(type: Docker, dependsOn: build) {
-    push = true
+    push = project.hasProperty("push")
+
     applicationName = jar.baseName
     dockerfile = file('docker/Dockerfile')
     doFirst {
