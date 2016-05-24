@@ -2,15 +2,16 @@ version: '2'
 
 services:
   qas:
-    build: .
     image: twwee/qas-service
     container_name: qas-node
+    hostname: qas-service
+    restart: always
     ports:
       - "8086:8086"
     networks:
       - wee-net
     volumes:
-      - ../dist:/app
+      - .:/app
 
 networks:
   wee-net:
