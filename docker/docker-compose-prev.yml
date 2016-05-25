@@ -2,11 +2,7 @@ version: '2'
 
 services:
   qas:
-    image: frolvlad/alpine-oraclejdk8:slim
-    working_dir: /app
-    volumes:
-      - ../build/libs/:/app
-    command: java -jar /app/qas-service-0.1.0.jar
+    image: twwee/qas-service
     container_name: qas-node
     hostname: qas-service
     restart: always
@@ -14,6 +10,8 @@ services:
       - "8086:8086"
     networks:
       - wee-net
+    volumes:
+      - .:/app
 
 networks:
   wee-net:
