@@ -78,23 +78,11 @@ drop database:
 [More about using flyway](https://flywaydb.org/documentation/gradle/): `flywayInfo`, `flywayValidate`, `flywayBaseline`
 
 ### Build Dockerfile
-Build docker image using gradle:
-`./gradlew buildDocker`
-
-Build docker image and push to `twwee/qas-service`:
-`./gradlew buildDocker -Ppush`
-
-Build docker image using docker:
-`cp build/libs/qas-service-0.1.0.jar docker && cd docker`
-
-`docker build .`
-
-If run service using docker:
-`docker run -p 8086:8086 -t twwee/qas-service`
+No need to build image
 
 #### Using Docker Compose
 Firstly, goto the docker directory:
-`cd docker`
+`cd infrastructure`
 
 Run Docker Compose:
 `docker-compose up`

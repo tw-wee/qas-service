@@ -2,7 +2,7 @@ version: '2'
 
 services:
   qas:
-    image: frolvlad/alpine-oraclejdk8:slim
+    image: java:openjdk-8-jre
     working_dir: /app
     volumes:
       - ../build/libs/:/app

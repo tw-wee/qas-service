@@ -5,7 +5,6 @@ buildscript {
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
         classpath("org.flywaydb:flyway-gradle-plugin:$flywayVersion")
-        classpath("se.transmode.gradle:gradle-docker:$gradleDockerVersion")
     }
 }
 
@@ -16,7 +15,6 @@ apply plugin: 'org.flywaydb.flyway'
 apply plugin: 'application'
 apply plugin: 'checkstyle'
 //apply plugin: 'findbugs'
-apply plugin: 'docker'
 apply from: 'jacoco.gradle'
 //apply from: 'database.gradle'
 
@@ -79,20 +77,6 @@ task integrationTest(type: Test) {
     include '**/*IntegrationTest.class'
 }
 build.dependsOn integrationTest
-
-group = 'twwee'
-task buildDocker(type: Docker, dependsOn: build) {
-    push = project.hasProperty("push")
-
-    applicationName = jar.baseName
-    dockerfile = file('docker/Dockerfile')
-    doFirst {
-        copy {
-            from jar
-            into stageDir
-        }
-    }
-}
 
 
 task wrapper(type: Wrapper) {
