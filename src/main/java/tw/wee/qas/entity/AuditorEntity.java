@@ -2,14 +2,21 @@ package tw.wee.qas.entity;
 
 import java.util.Date;
 import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.hateoas.ResourceSupport;
 
 @MappedSuperclass
-public abstract class AuditorEntity extends ResourceSupport {
+public abstract class AuditorEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
+    protected Long id;
+
     @Column(name = "time_created", nullable = false, updatable = false)
     @CreatedDate
     private Date timeCreated = new Date();
@@ -17,6 +24,14 @@ public abstract class AuditorEntity extends ResourceSupport {
     @Column(name = "last_modified", nullable = false)
     @LastModifiedDate
     private Date lastModified = new Date();
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Date getTimeCreated() {
         return timeCreated;

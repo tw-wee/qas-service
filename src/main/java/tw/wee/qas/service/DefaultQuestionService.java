@@ -30,7 +30,7 @@ public class DefaultQuestionService implements QuestionService {
 
     @Override
     public Question findQuestionById(String questionId) {
-        QuestionEntity questionEntity = questionRepository.findOne(questionId);
+        QuestionEntity questionEntity = questionRepository.findByUuid(questionId);
         Optional.ofNullable(questionEntity).orElseThrow(() ->
                 new NotFoundException("Question is not found!"));
         return mapper.map(questionEntity, Question.class);

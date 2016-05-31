@@ -53,7 +53,7 @@ public class DefaultQuestionServiceTest {
     @Test
     public void should_find_question_by_question_id() {
         QuestionEntity questionEntity = createQuestionEntity("book id", "This is a question!");
-        when(questionRepository.findOne(questionEntity.getUuid())).thenReturn(questionEntity);
+        when(questionRepository.findByUuid(questionEntity.getUuid())).thenReturn(questionEntity);
 
         Question question = questionService.findQuestionById(questionEntity.getUuid());
 
@@ -65,7 +65,7 @@ public class DefaultQuestionServiceTest {
     @Test(expected = NotFoundException.class)
     public void should_throw_exception_when_not_find_question_by_id() {
         String questionId = "1234";
-        when(questionRepository.findOne(questionId)).thenReturn(null);
+        when(questionRepository.findByUuid(questionId)).thenReturn(null);
 
         questionService.findQuestionById(questionId);
     }
