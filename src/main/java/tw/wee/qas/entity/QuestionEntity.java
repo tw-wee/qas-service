@@ -1,9 +1,15 @@
 package tw.wee.qas.entity;
 
+import static tw.wee.qas.enumeration.CommonStatus.ENABLED;
+
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.Table;
+
+import tw.wee.qas.enumeration.CommonStatus;
 
 @Entity
 @Table(name = "wee_question")
@@ -21,8 +27,9 @@ public class QuestionEntity extends AuditorEntity {
     @Column(name = "content", nullable = false)
     private String content;
 
-    @Column(name = "status", nullable = false, length = 16)
-    private String status = "ENABLED";
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private CommonStatus status = ENABLED;
 
     public String getUuid() {
         return uuid;
@@ -52,11 +59,11 @@ public class QuestionEntity extends AuditorEntity {
         this.content = content;
     }
 
-    public String getStatus() {
+    public CommonStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(CommonStatus status) {
         this.status = status;
     }
 }
