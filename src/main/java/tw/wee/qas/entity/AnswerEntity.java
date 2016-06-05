@@ -7,10 +7,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "wee_answer")
-public class AnswerEntity extends AuditorEntity {
+public class AnswerEntity extends BaseEntity {
 
     @Column(name = "uuid", nullable = false, unique = true, length = 64, updatable = false)
     private String uuid = UUID.randomUUID().toString();
+
+    @Column(name = "user_id", nullable = false, length = 64)
+    private String userId;
 
     @Column(name = "question_id", nullable = false, length = 64)
     private String questionId;

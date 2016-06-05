@@ -13,7 +13,7 @@ import tw.wee.qas.enumeration.CommonStatus;
 
 @Entity
 @Table(name = "wee_question")
-public class QuestionEntity extends AuditorEntity {
+public class QuestionEntity extends BaseEntity {
 
     @Column(name = "uuid", nullable = false, unique = true, length = 64, updatable = false)
     private String uuid = UUID.randomUUID().toString();
