@@ -1,4 +1,5 @@
-# qas-service
+# qas-service [![Build Status](https://travis-ci.org/tw-wee/qas-service.svg?branch=master)](https://travis-ci.org/tw-wee/qas-service)
+
 Questions &amp; Answers Service
 
 ### Check All Tasks
